@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
-import { SiLeetcode, SiHackerrank } from 'react-icons/si'
 
 
 import { Card, CardContent, Badge, Button } from '@mui/material';
