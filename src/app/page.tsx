@@ -80,19 +80,19 @@ export default function Portfolio() {
   <p className="text-xl text-gray-400 mb-6">DSA Enthusiast & Software Engineer</p>
   <div className="flex justify-center space-x-4">
     <a href="https://github.com/arulkumarann" target="_blank" rel="noopener noreferrer">
-      <Button variant="outline" size="icon" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
+      <Button variant="outlined" size="small" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
         <FaGithub className="h-5 w-5" />
         <span className="sr-only">GitHub</span>
       </Button>
     </a>
     <a href="https://www.linkedin.com/in/arul-kumaran-p" target="_blank" rel="noopener noreferrer">
-      <Button variant="outline" size="icon" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
+      <Button variant="outlined" size="small" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
         <FaLinkedin className="h-5 w-5" />
         <span className="sr-only">LinkedIn</span>
       </Button>
     </a>
     <a href="mailto:arulkumaranp02@gmail.com" target="_blank" rel="noopener noreferrer">
-      <Button variant="outline" size="icon" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
+      <Button variant="outlined" size="small" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
         <FaEnvelope className="h-5 w-5" />
         <span className="sr-only">Email</span>
       </Button>
