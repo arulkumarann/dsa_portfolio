@@ -42,7 +42,7 @@ export default function Portfolio() {
           {sections.map((section) => (
             <li key={section.id}>
               <Button
-                variant="ghost"
+              
                 className={`text-sm transition-colors duration-200 ${
                   activeSection === section.id 
                     ? 'text-purple-400 bg-gray-800' 
