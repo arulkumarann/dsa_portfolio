@@ -112,7 +112,7 @@ export default function Portfolio() {
             <CardContent className="p-6">
               <h2 className="text-2xl font-semibold mb-4 text-purple-400">About Me</h2>
               <p className="text-gray-300 leading-relaxed">
-                I'm a passionate software engineer with a strong focus on Data Structures and Algorithms. 
+                I&apos;m a passionate software engineer with a strong focus on Data Structures and Algorithms. 
                 My journey in DSA has been both challenging and rewarding, shaping me into a problem-solver 
                 who thrives on optimizing code and tackling complex computational challenges.
               </p>
@@ -172,8 +172,8 @@ export default function Portfolio() {
                   <h4 className="text-lg font-semibold text-purple-300 mb-2">Key Features:</h4>
                   <ul className="list-disc list-inside text-gray-300 space-y-2">
                     <li>Interactive grid-based interface for creating start, end, and obstacle points</li>
-                    <li>Implementation of Dijkstra's algorithm for finding the shortest path</li>
-                    <li>Visual representation of the algorithm's progress in real-time</li>
+                    <li>Implementation of A* algorithm for finding the shortest path</li>
+                    <li>Visual representation of the algorithm&apos;s progress in real-time</li>
                     <li>Ability to generate random mazes for diverse problem scenarios</li>
                   </ul>
                   <h4 className="text-lg font-semibold text-purple-300 mt-4 mb-2">Technologies Used:</h4>
@@ -234,7 +234,7 @@ export default function Portfolio() {
                 <div className="md:w-1/2">
                   <p className="text-gray-300 mb-4">
                     Throughout my college journey, I honed my DSA skills by solving a wide range of problems on elab, 
-                    our college's programming platform. This experience was crucial in developing my algorithmic thinking 
+                    our college&apos;s programming platform. This experience was crucial in developing my algorithmic thinking 
                     and coding proficiency.
                   </p>
                   <div className="space-y-4">
