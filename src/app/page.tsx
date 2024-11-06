@@ -2,12 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
-
-
-import { Card, CardContent, Badge, Button } from '@mui/material';
-
+import { MoonIcon, SunIcon } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -24,6 +24,19 @@ const stagger = {
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('about')
+  const [darkMode, setDarkMode] = useState(false)
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [darkMode])
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
 
   const sections = [
     { id: 'about', title: 'About' },
@@ -36,28 +49,39 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 py-12 px-4 sm:px-6 lg:px-8 font-sans">
-      <nav className="sticky top-0 z-10 bg-gray-900 py-4 mb-8">
-        <ul className="flex justify-center space-x-4 overflow-x-auto">
-          {sections.map((section) => (
-            <li key={section.id}>
-              <Button
-              
-                className={`text-sm transition-colors duration-200 ${
-                  activeSection === section.id 
-                    ? 'text-purple-400 bg-gray-800' 
-                    : 'text-gray-400 hover:text-pink-400 hover:bg-gray-800'
-                }`}
-                onClick={() => {
-                  setActiveSection(section.id)
-                  document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                {section.title}
-              </Button>
-            </li>
-          ))}
-        </ul>
+    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white py-12 px-4 sm:px-6 lg:px-8 font-sans transition-colors duration-200">
+      <nav className="sticky top-0 z-10 bg-gray-100 dark:bg-gray-900 py-4 mb-8">
+        <div className="max-w-4xl mx-auto flex justify-between items-center">
+          <ul className="flex space-x-4 overflow-x-auto">
+            {sections.map((section) => (
+              <li key={section.id}>
+                <Button
+                  variant="ghost"
+                  className={`text-sm transition-colors duration-200 ${
+                    activeSection === section.id 
+                      ? 'text-purple-600 dark:text-purple-400 bg-gray-200 dark:bg-gray-800' 
+                      : 'text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-gray-200 dark:hover:bg-gray-800'
+                  }`}
+                  onClick={() => {
+                    setActiveSection(section.id)
+                    document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' })
+                  }}
+                >
+                  {section.title}
+                </Button>
+              </li>
+            ))}
+          </ul>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleDarkMode}
+            className="ml-4"
+          >
+            {darkMode ? <SunIcon className="h-[1.2rem] w-[1.2rem]" /> : <MoonIcon className="h-[1.2rem] w-[1.2rem]" />}
+            <span className="sr-only">Toggle dark mode</span>
+          </Button>
+        </div>
       </nav>
 
       <div className="max-w-4xl mx-auto">
@@ -74,32 +98,29 @@ export default function Portfolio() {
             height={160}
             className="mx-auto rounded-full mb-6 border-2 border-purple-500"
           />
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">
-    Arul Kumaran
-  </h1>
-  <p className="text-xl text-gray-400 mb-6">DSA Enthusiast & Software Engineer</p>
-  <div className="flex justify-center space-x-4">
-    <a href="https://github.com/arulkumarann" target="_blank" rel="noopener noreferrer">
-      <Button variant="outlined" size="small" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
-        <FaGithub className="h-5 w-5" />
-        <span className="sr-only">GitHub</span>
-      </Button>
-    </a>
-    <a href="https://www.linkedin.com/in/arul-kumaran-p" target="_blank" rel="noopener noreferrer">
-      <Button variant="outlined" size="small" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
-        <FaLinkedin className="h-5 w-5" />
-        <span className="sr-only">LinkedIn</span>
-      </Button>
-    </a>
-    <a href="mailto:arulkumaranp02@gmail.com" target="_blank" rel="noopener noreferrer">
-      <Button variant="outlined" size="small" className="rounded-full bg-gray-900 hover:bg-gray-800 border-gray-700 hover:border-purple-500">
-        <FaEnvelope className="h-5 w-5" />
-        <span className="sr-only">Email</span>
-      </Button>
-    </a>
-    
-  </div>
-</motion.header>
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 text-transparent bg-clip-text">Arul Kumaran</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">DSA Enthusiast & Software Engineer</p>
+          <div className="flex justify-center space-x-4">
+            <a href="https://github.com/arulkumarann" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="icon" className="rounded-full bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-purple-500">
+                <FaGithub className="h-5 w-5" />
+                <span className="sr-only">GitHub</span>
+              </Button>
+            </a>
+            <a href="https://www.linkedin.com/in/arul-kumaran-p" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="icon" className="rounded-full bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-purple-500">
+                <FaLinkedin className="h-5 w-5" />
+                <span className="sr-only">LinkedIn</span>
+              </Button>
+            </a>
+            <a href="mailto:arulkumaranp02@gmail.com" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="icon" className="rounded-full bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 border-gray-300 dark:border-gray-700 hover:border-purple-500">
+                <FaEnvelope className="h-5 w-5" />
+                <span className="sr-only">Email</span>
+              </Button>
+            </a>
+          </div>
+        </motion.header>
 
         <motion.section 
           id="about"
@@ -108,10 +129,10 @@ export default function Portfolio() {
           animate="animate"
           variants={fadeInUp}
         >
-          <Card className="bg-gray-900 border-gray-800">
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
             <CardContent className="p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-purple-400">About Me</h2>
-              <p className="text-gray-300 leading-relaxed">
+              <h2 className="text-2xl font-semibold mb-4 text-purple-600 dark:text-purple-400">About Me</h2>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 I&apos;m a passionate software engineer with a strong focus on Data Structures and Algorithms. 
                 My journey in DSA has been both challenging and rewarding, shaping me into a problem-solver 
                 who thrives on optimizing code and tackling complex computational challenges.
@@ -127,7 +148,7 @@ export default function Portfolio() {
           animate="animate"
           variants={stagger}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-purple-400">Skills</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">Skills</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {['Data Structures', 'Algorithms', 'Problem Solving', 'Time Complexity Analysis', 'Space Complexity Analysis', 'Dynamic Programming', 'Graph Algorithms', 'Sorting Algorithms', 'Searching Algorithms', 'Tree Traversals', 'Hashing'].map((skill) => (
               <motion.div 
@@ -136,7 +157,7 @@ export default function Portfolio() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Badge className="w-full py-2 text-sm bg-gray-800 hover:bg-gray-700 text-purple-300 border border-purple-500">
+                <Badge className="w-full py-2 text-sm bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-purple-600 dark:text-purple-300 border border-purple-500">
                   {skill}
                 </Badge>
               </motion.div>
@@ -151,10 +172,10 @@ export default function Portfolio() {
           animate="animate"
           variants={fadeInUp}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-purple-400">Projects</h2>
-          <Card className="bg-gray-900 border-gray-800">
+          <h2 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">Projects</h2>
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-pink-400">Shortest Path Finder</h3>
+              <h3 className="text-xl font-semibold mb-4 text-pink-600 dark:text-pink-400">Shortest Path Finder</h3>
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="md:w-1/2">
                   <Image
@@ -166,20 +187,20 @@ export default function Portfolio() {
                   />
                 </div>
                 <div className="md:w-1/2">
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-700 dark:text-gray-300 mb-4">
                     The Shortest Path Finder is an interactive web application that demonstrates the power of graph algorithms in solving real-world problems. This project showcases my proficiency in implementing complex data structures and algorithms.
                   </p>
-                  <h4 className="text-lg font-semibold text-purple-300 mb-2">Key Features:</h4>
-                  <ul className="list-disc list-inside text-gray-300 space-y-2">
+                  <h4 className="text-lg font-semibold text-purple-600 dark:text-purple-300 mb-2">Key Features:</h4>
+                  <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
                     <li>Interactive grid-based interface for creating start, end, and obstacle points</li>
                     <li>Implementation of A* algorithm for finding the shortest path</li>
                     <li>Visual representation of the algorithm&apos;s progress in real-time</li>
                     <li>Ability to generate random mazes for diverse problem scenarios</li>
                   </ul>
-                  <h4 className="text-lg font-semibold text-purple-300 mt-4 mb-2">Technologies Used:</h4>
+                  <h4 className="text-lg font-semibold text-purple-600 dark:text-purple-300 mt-4 mb-2">Technologies Used:</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['DSA','HTML5 Canvas', 'CSS3'].map((tech) => (
-                      <Badge key={tech} className="bg-gray-800 text-purple-300 border border-purple-500">
+                    {['DSA', 'HTML5 Canvas', 'CSS3'].map((tech) => (
+                      <Badge key={tech} className="bg-gray-100 dark:bg-gray-800 text-purple-600 dark:text-purple-300 border border-purple-500">
                         {tech}
                       </Badge>
                     ))}
@@ -197,8 +218,8 @@ export default function Portfolio() {
           animate="animate"
           variants={fadeInUp}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-purple-400">Learning Journey</h2>
-          <Card className="bg-gray-900 border-gray-800">
+          <h2 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">Learning Journey</h2>
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
             <CardContent className="p-6">
               <div className="relative">
                 {['Foundations', 'Practice & Application', 'Advanced Concepts', 'Real-world Projects'].map((stage, index) => (
@@ -207,8 +228,8 @@ export default function Portfolio() {
                       {index + 1}
                     </div>
                     <div className="ml-4 flex-grow">
-                      <h3 className="text-lg font-semibold text-pink-400">{stage}</h3>
-                      <p className="text-gray-300">{getJourneyDescription(stage)}</p>
+                      <h3 className="text-lg font-semibold text-pink-600 dark:text-pink-400">{stage}</h3>
+                      <p className="text-gray-700 dark:text-gray-300">{getJourneyDescription(stage)}</p>
                     </div>
                     {index < 3 && (
                       <div className="absolute left-4 top-8 bottom-0 w-0.5 bg-purple-500" style={{ height: 'calc(100% - 2rem)' }} />
@@ -227,30 +248,30 @@ export default function Portfolio() {
           animate="animate"
           variants={fadeInUp}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-purple-400">elab Problem Solving</h2>
-          <Card className="bg-gray-900 border-gray-800">
+          <h2 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">elab Problem Solving</h2>
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="md:w-1/2">
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-700 dark:text-gray-300 mb-4">
                     Throughout my college journey, I honed my DSA skills by solving a wide range of problems on elab, 
                     our college&apos;s programming platform. This experience was crucial in developing my algorithmic thinking 
                     and coding proficiency.
                   </p>
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-pink-400">Problems Solved</h3>
-                      <p className="text-gray-300">Successfully completed over 30 DSA problems on elab</p>
+                      <h3 className="text-lg font-semibold text-pink-600 dark:text-pink-400">Problems Solved</h3>
+                      <p className="text-gray-700 dark:text-gray-300">Successfully completed over 30 DSA problems on elab</p>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-pink-400">Key Achievements</h3>
-                      <ul className="list-disc list-inside text-gray-300">
+                      <h3 className="text-lg font-semibold text-pink-600 dark:text-pink-400">Key Achievements</h3>
+                      <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
                         <li>Achieved 100% completion rate in Data Structures module</li>
                       </ul>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-pink-400">Impact</h3>
-                      <p className="text-gray-300">
+                      <h3 className="text-lg font-semibold text-pink-600 dark:text-pink-400">Impact</h3>
+                      <p className="text-gray-700 dark:text-gray-300">
                         This intensive problem-solving experience on elab significantly improved my ability to analyze, 
                         design, and implement efficient algorithms, preparing me for real-world software engineering challenges.
                       </p>
@@ -278,12 +299,12 @@ export default function Portfolio() {
           animate="animate"
           variants={fadeInUp}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-purple-400">Internship Experience</h2>
-          <Card className="bg-gray-900 border-gray-800">
+          <h2 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">Internship Experience</h2>
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-pink-400">Software Engineer Intern</h3>
-              <p className="text-gray-400 mb-4">C4Scale Inc. | Oct 2023 - Present</p>
-              <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <h3 className="text-xl font-semibold mb-2 text-pink-600 dark:text-pink-400">Software Engineer Intern</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">C4Scale Inc. | Oct 2023 - Present</p>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
                 <li>Implemented efficient algorithms for data processing, reducing runtime by 40%</li>
                 <li>Conducted research on prompt security in large language models (LLMs), focusing on safeguarding against
                 adversarial and injection attacks.</li>
@@ -299,14 +320,13 @@ export default function Portfolio() {
           animate="animate"
           variants={fadeInUp}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-purple-400">Education</h2>
-          <Card className="bg-gray-900 border-gray-800">
+          <h2 className="text-2xl font-semibold mb-6 text-purple-600 dark:text-purple-400">Education</h2>
+          <Card className="bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-pink-400">Bachelor of Science in Computer Science w/s AIML</h3>
-              <p className="text-gray-400 mb-2">SRM UNIVERSITY | 2023 - 2027</p>
-              <p className="text-gray-300">
-                Relevant Coursework: Data Structures, Algorithms, 
-           Database Systems
+              <h3 className="text-xl font-semibold mb-2 text-pink-600 dark:text-pink-400">Bachelor of Science in Computer Science w/s AIML</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-2">SRM UNIVERSITY | 2023 - 2027</p>
+              <p className="text-gray-700 dark:text-gray-300">
+                Relevant Coursework: Data Structures, Algorithms, Database Systems
               </p>
             </CardContent>
           </Card>
